@@ -1,18 +1,33 @@
-const restfy = require('restify')
-const server = restfy.createServer()
-const routes = require('../routes')
-const cors = require('./cors')
+const express = require('express');
+const bodyParser = require('body-parser');
 
-const jwtMiddleware = require('./jwtMiddleware')
+const cors = require('./cors');
+const jwtMiddleware = require('./jwtMiddleware');
 
-const exclusion = ['/autenticacao']
+const exclusion = ['/registra/pjuridica','/registra/pfisica','/auth/login','/']
 
-server.pre(cors.preflight)
-server.use(cors.actual)
-server.use(restfy.plugins.bodyParser())
-server.use(jwtMiddleware({ exclusion }))
+const app = express();
+app.use(cors());
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(jwtMiddleware({ exclusion }));
+
+app.set('view engine', 'ejs');
+app.set('views', './src/views');
+
+//Rotas
+const routes = require('../routes');
+const autentica = require('../routes/auth');
+const pessoaFisica = require('../routes/pessoaFisica');
+const pessoaJurudica = require('../routes/pessoaJurudica');
+
+//Rotas caminhos
+app.use('/',  routes);
+app.use('/auth', autentica);
+app.use('/registra', pessoaFisica);
+app.use('/registra', pessoaJurudica);
 
 
-routes(server)
-
-module.exports = server
+module.exports = app
