@@ -1,0 +1,26 @@
+{
+  "name": "autothentix",
+  "version": "1.0.0",
+  "description": "Autothentix server",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "clear && nodemon ./src/index.js"
+  },
+  "author": "Erico Andre",
+  "license": "ISC",
+  "dependencies": {
+    "jsonwebtoken": "^8.3.0",
+    "mysql2": "^1.5.3",
+    "restify": "^7.2.1",
+    "sequelize": "^4.37.10",
+    "sha1": "^1.1.1"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.17.5",
+    "restify-cors-middleware": "^1.1.1"
+  }
+}
