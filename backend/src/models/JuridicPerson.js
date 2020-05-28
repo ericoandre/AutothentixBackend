@@ -38,5 +38,5 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.DATE,
 			allowNull: false
 		}
-	},{tableName: 'juridic_person'})
+	},{tableName: 'juridicPerson'})
 }
